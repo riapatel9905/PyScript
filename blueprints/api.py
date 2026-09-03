@@ -60,6 +60,34 @@ def add_to_cart():
     return jsonify(_cart_payload())
 
 
+@api_bp.route("/cart/update-by-item", methods=["POST"])
+@login_required
+def update_by_item():
+    data = request.get_json(silent=True) or request.form
+    try:
+        menu_item_id = int(data.get("menu_item_id"))
+        quantity = int(data.get("quantity"))
+    except (TypeError, ValueError):
+        return jsonify({"error": "menu_item_id and quantity are required"}), 400
+
+    ci = CartItem.query.filter_by(user_id=current_user.id, menu_item_id=menu_item_id).first()
+    if quantity <= 0:
+        if ci:
+            db.session.delete(ci)
+            db.session.commit()
+    else:
+        if ci:
+            ci.quantity = quantity
+        else:
+            item = MenuItem.query.get(menu_item_id)
+            if not item or not item.is_available:
+                return jsonify({"error": "Item not available"}), 404
+            ci = CartItem(user_id=current_user.id, menu_item_id=menu_item_id, quantity=quantity)
+            db.session.add(ci)
+        db.session.commit()
+    return jsonify(_cart_payload())
+
+
 @api_bp.route("/cart/update", methods=["POST"])
 @login_required
 def update_cart():

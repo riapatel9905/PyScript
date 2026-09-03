@@ -85,7 +85,12 @@ async function syncCart(itemId, quantity) {
       body: JSON.stringify({ menu_item_id: itemId, quantity: quantity })
     });
     const data = await res.json();
-    document.querySelectorAll(".cart-badge").forEach(el => el.textContent = data.count);
+    if (data && data.count !== undefined) {
+      document.querySelectorAll(".cart-badge").forEach(el => el.textContent = data.count);
+      const cartCountEl = document.getElementById("cart-count");
+      if (cartCountEl) cartCountEl.textContent = data.count;
+      totalItems = data.count;
+    }
   } catch (err) {
     console.error("Cart sync failed", err);
   }
