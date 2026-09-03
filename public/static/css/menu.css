@@ -1,0 +1,214 @@
+/* ================= MENU PAGE ================= */
+
+.menu-section {
+  padding: 50px 8%;
+}
+
+.menu-title {
+  font-size: 28px;
+  margin-bottom: 35px;
+}
+
+/* GRID */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid #e5e5e5;
+}
+
+/* ITEM */
+.menu-item {
+  padding: 28px 22px 32px;
+  text-align: center;
+  border-right: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item:last-child {
+  border-right: none;
+}
+
+/* IMAGE */
+.menu-item img {
+  width: 100%;
+  max-height: 135px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+/* TITLE */
+.menu-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* TEXT BLOCK */
+.text-block {
+  flex-grow: 1; 
+}
+
+.subtitle {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* DIVIDER LINE  */
+.divider {
+  width: 32px;
+  height: 1px;
+  background: #000000;
+  margin: 0 auto 10px;
+}
+
+/* DESCRIPTION */
+.desc {
+  font-size: 12.5px;
+  color: #000000;
+  line-height: 1.6;
+}
+
+/* PRICE ROW –  */
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* BUTTON */
+.price-row button {
+  border: 1px solid #000;
+  background: transparent;
+  padding: 6px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.price-row button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1200px) {
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .menu-item:nth-child(3) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-item {
+    border-right: none;
+    border-bottom: 1px solid #e5e5e5;
+  }
+}
+/* QUANTITY CONTROL */
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #000;
+  background: transparent;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.qty-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.qty {
+  min-width: 14px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+/* ===== MENU PAGE BACKGROUND ===== */
+.menu-page {
+  background: #9e818197;
+  min-height: 100vh;
+  padding: 40px 6%;
+}
+
+/* optional: make cards pop more */
+.menu-item {
+  background: #e6e0e097;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  position: relative;;
+}
+.menu-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #6b1111, #ffcc66);
+}
+
+/* hover effect */
+.menu-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.15);
+}
+
+
+.menu-page h2,
+.menu-page p {
+  color: #000000;
+}
+.cart-display {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #6b1111;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  z-index: 999;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.menu-section {
+  scroll-margin-top: 90px; 
+}

@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: #2b2b2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MAIN WRAPPER */
+.login-wrapper {
+  width: 1100px;
+  height: 620px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #e6d8c6;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+/* LEFT IMAGE */
+.login-image {
+  background: 
+    linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
+    url("../img/login.jpg") center/cover no-repeat;
+}
+
+/* RIGHT FORM */
+.login-form {
+  background: #1f1f1f;
+  color: #ffffff;
+  padding: 60px 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo img {
+  width: 110px;
+  margin-bottom: 25px;
+}
+
+.login-form h2 {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #bbbbbb;
+  margin-bottom: 30px;
+}
+
+/* FORM */
+form label {
+  font-size: 13px;
+  color: #cccccc;
+  margin-bottom: 6px;
+  display: block;
+}
+
+form input {
+  width: 100%;
+  padding: 13px 14px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: none;
+  background: #2b2b2b;
+  color: #fff;
+  font-size: 14px;
+}
+
+form input:focus {
+  outline: 2px solid #c8a27a;
+}
+
+/* BUTTON */
+form button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  border-radius: 30px;
+  border: none;
+  background: #f1f1f1;
+  color: #1f1f1f;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+form button:hover {
+  background: #d6b48c;
+}
+
+/* SIGNUP TEXT */
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.signup-text a {
+  color: #d6b48c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+.login-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.login-logo img {
+  width: 140px;       
+  height: auto;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    135deg,
+    #1c1c1c,
+    #2b2b2b,
+    #3a2f28
+  );
+}

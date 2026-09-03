@@ -1,0 +1,134 @@
+/* ================= CONTACT HERO ================= */
+
+.contact-hero {
+  position: relative;
+  height: 38vh;                 /* slightly less height */
+  background: url("/static/img/coffee1.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;             /* height of navbar */
+}
+
+/* Light overlay */
+.contact-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);   /* soft dark layer */
+  backdrop-filter: blur(2px);       /* optional elegance */
+}
+
+/* Title */
+.contact-hero-title {
+  position: relative;
+  font-size: 3.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  font-family: "Playfair Display", serif; /* classy café font */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-hero {
+    height: 28vh;
+  }
+
+  .contact-hero-title {
+    font-size: 2.2rem;
+  }
+}
+/* ================= CONTACT SECTION ================= */
+
+.contact-section {
+  background: #e7d6c2; /* beige coffee tone */
+  padding: 60px 0;
+}
+
+.contact-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* LEFT */
+.contact-info h3 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.contact-info p {
+  font-size: 15px;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* FORM */
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border: 1px solid #cbb59c;
+  background: transparent;
+  font-size: 14px;
+  resize: none;
+}
+
+.contact-form textarea {
+  height: 90px;
+}
+
+.contact-form button {
+  width: 120px;
+  padding: 10px;
+  background: #5a3b2e;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #3f291f;
+}
+
+/* MAP */
+.contact-map iframe {
+  width: 120px;
+  height: 120px;
+  border: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+.radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #4b3621;
+  cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+  accent-color: #c49a6c;
+}
