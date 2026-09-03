@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% block title %}Manage Orders{% endblock %}
+{% block admin_content %}
+<h1>All Orders</h1>
+
+<table class="admin-table">
+  <thead><tr><th>ID</th><th>Customer</th><th>Branch</th><th>Items</th><th>Total</th><th>Payment</th><th>Status</th><th>Placed</th><th></th></tr></thead>
+  <tbody>
+  {% for order in orders %}
+    <tr>
+      <td>#{{ order.id }}</td>
+      <td>{{ order.user.username }}</td>
+      <td>{{ order.store.name }}</td>
+      <td>{{ order.items|length }}</td>
+      <td>₹{{ order.total|int }}</td>
+      <td>{{ order.payment_method.replace('_',' ')|title }}</td>
+      <td><span class="status-pill status-{{ order.status }}">{{ order.status.replace('_',' ') }}</span></td>
+      <td>{{ order.created_at.strftime('%d %b, %I:%M %p') }}</td>
+      <td><a href="{{ url_for('admin.order_detail', order_id=order.id) }}">Manage</a></td>
+    </tr>
+  {% else %}
+    <tr><td colspan="9" style="text-align:center;color:#999;">No orders yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

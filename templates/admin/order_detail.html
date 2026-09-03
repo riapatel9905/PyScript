@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% block title %}Order #{{ order.id }}{% endblock %}
+{% block admin_content %}
+<h1>Order #{{ order.id }}</h1>
+
+<div class="checkout-card" style="max-width:640px;">
+  <p><strong>Customer:</strong> {{ order.user.username }} ({{ order.user.email }}, {{ order.user.phone }})</p>
+  <p><strong>Branch:</strong> {{ order.store.name }}</p>
+  <p><strong>Delivery Address:</strong> {{ order.delivery_address }}</p>
+  <p><strong>Payment:</strong> {{ order.payment_method.replace('_',' ')|title }}
+    {% if order.payment_last4 %} ({{ order.payment_last4 }}){% endif %}</p>
+  <p><strong>Placed:</strong> {{ order.created_at.strftime('%d %b %Y, %I:%M %p') }}</p>
+
+  <h3>Items</h3>
+  {% for oi in order.items %}
+  <div class="cart-row">
+    <img src="{{ url_for('static', filename='img/' ~ oi.image) }}" alt="{{ oi.name }}">
+    <div class="info"><h4>{{ oi.name }}</h4><div class="unit-price">₹{{ oi.price }} × {{ oi.quantity }}</div></div>
+    <div class="row-subtotal">₹{{ oi.subtotal }}</div>
+  </div>
+  {% endfor %}
+
+  <div class="cart-summary" style="box-shadow:none;padding:0;margin-top:14px;">
+    <div class="row"><span>Subtotal</span><span>₹{{ order.subtotal|int }}</span></div>
+    <div class="row"><span>Delivery Fee</span><span>{{ 'FREE' if order.delivery_fee == 0 else '₹' ~ order.delivery_fee|int }}</span></div>
+    <div class="row total"><span>Total</span><span>₹{{ order.total|int }}</span></div>
+  </div>
+
+  <h3>Update Status</h3>
+  <form method="post" action="{{ url_for('admin.order_status', order_id=order.id) }}" style="display:flex;gap:10px;">
+    <select name="status" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid #e2ded5;">
+      {% for s in statuses %}
+      <option value="{{ s }}" {% if s == order.status %}selected{% endif %}>{{ s.replace('_',' ')|title }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn-gold btn-sm">Update</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | Py-Script The Tech Cafe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ===== GLOBAL ===== */
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1c1c1c, #2b2b2b, #3a2f28);
+    }
+
+    /* ===== MAIN CARD ===== */
+    .signup-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 900px;
+      max-width: 95%;
+      background: #222;
+      color: #fff;
+    }
+
+    /* ===== LEFT IMAGE ===== */
+    .signup-image {
+      background: url("{{ url_for('static', filename='img/login.jpg') }}") center/cover no-repeat;
+      min-height: 500px;
+    }
+
+    /* ===== RIGHT FORM ===== */
+    .signup-form {
+      padding: 50px 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .signup-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .signup-logo img {
+      width: 140px;
+    }
+
+    .signup-form h2 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .signup-form p {
+      text-align: center;
+      color: #bbb;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    /* ===== INPUTS ===== */
+    .signup-form label {
+      font-size: 13px;
+      margin-bottom: 6px;
+      display: block;
+      color: #ddd;
+    }
+
+    .signup-form input {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      background: #333;
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .signup-form input::placeholder {
+      color: #999;
+    }
+
+    .signup-form input:focus {
+      background: #3a3a3a;
+    }
+
+    /* ===== BUTTON ===== */
+    .signup-form button {
+      width: 100%;
+      padding: 14px;
+      background: #fff;
+      color: #000;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .signup-form button:hover {
+      background: #e6e6e6;
+    }
+
+    /* ===== LOGIN LINK ===== */
+    .signup-form .login-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .signup-form .login-link a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* ===== ERRORS (added - not in original design) ===== */
+    .signup-form .form-errors {
+      color: #ff8b8b;
+      font-size: 12.5px;
+      text-align: center;
+      margin: -18px 0 16px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .signup-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .signup-image {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="signup-wrapper">
+
+  <!-- LEFT IMAGE -->
+  <div class="signup-image"></div>
+
+  <!-- RIGHT FORM -->
+  <div class="signup-form">
+
+    <div class="signup-logo">
+      <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Py-Script Logo">
+    </div>
+
+    <h2>Create Account</h2>
+    <p>Welome to Py-Script The Tech Cafe</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="form-errors">
+          {% for category, message in messages %}{{ message }}<br>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form id="signupForm" method="post" action="{{ url_for('auth.signup') }}">
+
+      <!-- USERNAME (letters only) -->
+      <label>Username</label>
+      <input
+        type="text"
+        name="username"
+        placeholder="Your Name"
+        pattern="[A-Za-z]+"
+        title="Username should contain only letters"
+        value="{{ form.get('username','') }}"
+        required
+      >
+
+      <!-- EMAIL -->
+      <label>Email address</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="you@example.com"
+        value="{{ form.get('email','') }}"
+        required
+      >
+
+      <!-- PHONE NUMBER -->
+      <label>Phone Number</label>
+      <input
+        type="tel"
+        name="phone"
+        placeholder="10 digit number"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        title="Phone number must be exactly 10 digits"
+        value="{{ form.get('phone','') }}"
+        required
+      >
+
+      <!-- PASSWORD -->
+      <label>Password</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="8–12 chars, letter, number & symbol"
+        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,12}$"
+        title="8–12 characters, must include letters, numbers & special character"
+        required
+      >
+
+      <button type="submit">Sign Up</button>
+
+    </form>
+
+    <div class="login-link">
+      Already have an account?
+      <a href="{{ url_for('auth.login') }}">Login</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

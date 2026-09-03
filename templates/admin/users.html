@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block admin_content %}
+<h1>Users</h1>
+
+<table class="admin-table">
+  <thead><tr><th>Username</th><th>Email</th><th>Phone</th><th>Joined</th><th>Admin</th><th></th></tr></thead>
+  <tbody>
+  {% for u in users %}
+    <tr>
+      <td>{{ u.username }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.phone }}</td>
+      <td>{{ u.created_at.strftime('%d %b %Y') }}</td>
+      <td>{% if u.is_admin %}<span class="pill-yes">Yes</span>{% else %}<span class="pill-no">No</span>{% endif %}</td>
+      <td>
+        {% if u.id != current_user.id %}
+        <form method="post" action="{{ url_for('admin.toggle_admin', user_id=u.id) }}">
+          <button type="submit" class="btn-outline btn-sm">{{ 'Revoke Admin' if u.is_admin else 'Make Admin' }}</button>
+        </form>
+        {% else %}
+        <span style="color:#999;font-size:12px;">(you)</span>
+        {% endif %}
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" style="text-align:center;color:#999;">No users yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

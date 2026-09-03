@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% block title %}Manage Menu{% endblock %}
+{% block admin_content %}
+<div class="admin-topbar">
+  <h1 style="margin:0;">Menu Items</h1>
+  <a href="{{ url_for('admin.menu_form') }}" class="btn-gold btn-sm">+ Add Item</a>
+</div>
+
+<table class="admin-table">
+  <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Available</th><th></th></tr></thead>
+  <tbody>
+  {% for item in items %}
+    <tr>
+      <td><img src="{{ url_for('static', filename='img/' ~ item.image) }}" alt=""></td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.category|title }}</td>
+      <td>₹{{ item.price }}</td>
+      <td>{% if item.is_available %}<span class="pill-yes">Yes</span>{% else %}<span class="pill-no">No</span>{% endif %}</td>
+      <td class="table-actions">
+        <a href="{{ url_for('admin.menu_form', item_id=item.id) }}" class="btn-outline btn-sm">Edit</a>
+        <form method="post" action="{{ url_for('admin.menu_delete', item_id=item.id) }}" onsubmit="return confirm('Delete {{ item.name }}?');">
+          <button type="submit" class="btn-danger btn-sm">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" style="text-align:center;color:#999;">No menu items yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

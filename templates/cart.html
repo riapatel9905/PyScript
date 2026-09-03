@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Your Cart | Py-Script The Tech Cafe</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+
+<body>
+
+<div class="cart-page">
+
+  <div class="page-top">
+    <a href="{{ url_for('shop.home') }}" class="back-home">
+      <i class="fas fa-arrow-left"></i>
+      Back to Home
+    </a>
+  </div>
+
+  <div class="cart-wrap">
+
+    <h1>Your Cart</h1>
+
+   <div id="cart-empty"
+     class="empty-state"
+     {% if items %}style="display:none;"{% endif %}>
+
+      <i class="fas fa-cart-shopping"></i>
+
+      <p>Your cart is empty.</p>
+
+      <a href="{{ url_for('shop.menu') }}" class="btn-gold">
+        Browse Menu
+      </a>
+    </div>
+
+
+    <div id="cart-list">
+
+      {% for ci in items %}
+
+      <div class="cart-row" data-cart-item-id="{{ ci.id }}">
+
+        <img
+          src="{{ url_for('static', filename='img/' ~ ci.menu_item.image) }}"
+          alt="{{ ci.menu_item.name }}"
+        >
+
+        <div class="info">
+
+          <h4>{{ ci.menu_item.name }}</h4>
+
+          <div class="unit-price">
+            ₹{{ ci.menu_item.price }} each
+          </div>
+
+        </div>
+
+
+        <div class="qty-box">
+
+          <button class="qty-minus" data-id="{{ ci.id }}">
+            −
+          </button>
+
+          <span>{{ ci.quantity }}</span>
+
+          <button class="qty-plus" data-id="{{ ci.id }}">
+            +
+          </button>
+
+        </div>
+
+
+        <div class="row-subtotal">
+          ₹{{ ci.subtotal }}
+        </div>
+
+
+        <button
+          class="remove-btn"
+          data-id="{{ ci.id }}"
+          title="Remove">
+
+          <i class="fas fa-trash"></i>
+
+        </button>
+
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+
+    <div id="cart-summary"
+     class="cart-summary"
+     {% if not items %}style="display:none;"{% endif %}>
+
+      <div class="row">
+        <span>Subtotal</span>
+        <span id="subtotal-amount">
+          ₹{{ subtotal }}
+        </span>
+      </div>
+
+      <div class="row">
+        <span>Delivery Fee</span>
+
+        <span id="delivery-fee-amount">
+          {{ 'FREE' if subtotal >= 500 else '₹40' }}
+        </span>
+      </div>
+
+      <div class="row free-delivery">
+        Free delivery on orders ₹500 and above.
+      </div>
+
+      <div class="row total">
+        <span>Total</span>
+
+        <span id="total-amount">
+          ₹{{ subtotal + (0 if subtotal >= 500 else 40) }}
+        </span>
+      </div>
+
+
+      <a
+        href="{{ url_for('cart.checkout') }}"
+        class="btn-gold proceed-btn"
+      >
+        Proceed to Buy
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

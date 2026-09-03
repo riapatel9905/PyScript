@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Edit' if item else 'Add' }} Menu Item{% endblock %}
+{% block admin_content %}
+<h1>{{ 'Edit' if item else 'Add' }} Menu Item</h1>
+
+<div class="checkout-card" style="max-width:520px;">
+  <form method="post">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" name="name" value="{{ form.get('name', item.name if item else '') }}" required>
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <select name="category" required>
+        {% for c in categories %}
+        <option value="{{ c }}" {% if (form.get('category', item.category if item else '')) == c %}selected{% endif %}>{{ c|title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea name="description" rows="3">{{ form.get('description', item.description if item else '') }}</textarea>
+    </div>
+    <div class="form-group">
+      <label>Price (₹)</label>
+      <input type="number" name="price" min="1" value="{{ form.get('price', item.price if item else '') }}" required>
+    </div>
+    <div class="form-group">
+      <label>Image filename (from /static/img, e.g. m1.jpg)</label>
+      <input type="text" name="image" value="{{ form.get('image', item.image if item else '') }}" required>
+      {% set preview = form.get('image', item.image if item else '') %}
+      {% if preview %}<img src="{{ url_for('static', filename='img/' ~ preview) }}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;margin-top:8px;" onerror="this.style.display='none';">{% endif %}
+    </div>
+    <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+      <input type="checkbox" name="is_available" style="width:auto;" {% if (item and item.is_available) or (not item and not form) %}checked{% endif %}>
+      <label style="margin:0;">Available for ordering</label>
+    </div>
+    <button type="submit" class="btn-gold">Save</button>
+    <a href="{{ url_for('admin.menu_list') }}" class="btn-outline" style="margin-left:8px;">Cancel</a>
+  </form>
+</div>
+{% endblock %}

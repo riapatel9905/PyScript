@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Edit' if store else 'Add' }} Branch{% endblock %}
+{% block admin_content %}
+<h1>{{ 'Edit' if store else 'Add' }} Branch</h1>
+
+<div class="checkout-card" style="max-width:520px;">
+  <form method="post">
+    <div class="form-group">
+      <label>Branch Name</label>
+      <input type="text" name="name" value="{{ form.get('name', store.name if store else '') }}" required>
+    </div>
+    <div class="form-group">
+      <label>Address</label>
+      <textarea name="address" rows="3" required>{{ form.get('address', store.address if store else '') }}</textarea>
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="text" name="phone" value="{{ form.get('phone', store.phone if store else '') }}">
+    </div>
+    <div style="display:flex;gap:12px;">
+      <div class="form-group" style="flex:1;">
+        <label>Latitude</label>
+        <input type="text" name="latitude" value="{{ form.get('latitude', store.latitude if store else '') }}" required>
+      </div>
+      <div class="form-group" style="flex:1;">
+        <label>Longitude</label>
+        <input type="text" name="longitude" value="{{ form.get('longitude', store.longitude if store else '') }}" required>
+      </div>
+    </div>
+    <p style="font-size:11.5px;color:#999;margin-top:-10px;">Tip: right-click the location on Google Maps and copy the coordinates.</p>
+    <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+      <input type="checkbox" name="is_active" style="width:auto;" {% if (store and store.is_active) or (not store and not form) %}checked{% endif %}>
+      <label style="margin:0;">Active (accepting orders)</label>
+    </div>
+    <button type="submit" class="btn-gold">Save</button>
+    <a href="{{ url_for('admin.store_list') }}" class="btn-outline" style="margin-left:8px;">Cancel</a>
+  </form>
+</div>
+{% endblock %}

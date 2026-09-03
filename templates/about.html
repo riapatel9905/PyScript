@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Py-Script The Tech Cafe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS first -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your custom styles last so they can override Bootstrap if needed -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/extras.css') }}">
+
+</head>
+<body>
+{% set active = 'about' %}
+{% include "partials/navbar.html" %}
+
+<div class="flash-wrap">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+  <!-- ================= ABOUT HERO ================= -->
+  <section class="about-hero">
+    <div class="about-overlay"></div>
+
+    <div class="about-hero-content">
+      <h1> Coffee is the flint.<br>
+        Community makes it the flame.</h1>
+      <p>
+       At Py-Script : The tech cafe, people our baristas and guests are at the center. <br>
+        Our robot is the servant: it handles the busywork so conversations can breathe,<br>
+         giving us both a spark and a destination for connection. We deliver top‑tier  <br>
+         drinks with speed and consistency so teams have more time to welcome guests and grow community.
+      </p>
+    </div>
+  </section>
+  <section class="beliefs-section">
+  <h2 class="beliefs-title">What We Believe</h2>
+
+  <div class="beliefs-grid">
+    <div class="belief-card">
+      <h3>People over transactions</h3>
+      <p>
+        Cafés are modern town squares. We design for conversations,
+        not just orders.
+      </p>
+    </div>
+
+    <div class="belief-card">
+      <h3>Quality without compromise</h3>
+      <p>
+        Precision and consistency ensure barista-level excellence —
+        every time.
+      </p>
+    </div>
+
+    <div class="belief-card">
+      <h3>More businesses surviving</h3>
+      <p>
+        Lower overhead and simpler operations keep doors open
+        and standards high.
+      </p>
+    </div>
+
+    <div class="belief-card">
+      <h3>Less wait. More we.</h3>
+      <p>
+        Faster service creates space for real engagement
+        and repeat visits.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- ================= IMAGE STRIP ================= -->
+<section class="about-gallery-strip">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="{{ url_for('static', filename='img/b14.jpg') }}" alt="Cafe ambience">
+    </div>
+
+    <div class="gallery-item">
+      <img src="{{ url_for('static', filename='img/b6.jpg') }}" alt="Coffee brewing">
+    </div>
+
+    <div class="gallery-item">
+      <img src="{{ url_for('static', filename='img/b12.jpg') }}" alt="Signature drinks">
+    </div>
+  </div>
+</section>
+
+
+<section class="story-section">
+  <div class="story-container">
+
+    <!-- Image -->
+    <div class="story-image">
+      <img src="{{ url_for('static', filename='img/ourstory.jpg') }}" alt="Our Story">
+    </div>
+
+    <!-- Text -->
+    <div class="story-content">
+      <h2>Our Story</h2>
+
+      <p>
+        We started with a question:
+        <em>Can cafés be faster, smarter, and more sustainable — without losing their soul?</em>
+        What began as a bold idea is now brewing daily in cities across the country.
+      </p>
+
+      <p>
+        We’re not just building robotic coffee shops —
+        we’re building <strong>community infrastructure</strong>
+        for the future of food & beverage.
+      </p>
+    </div>
+
+  </div>
+</section>
+<section class="promise-section">
+  <div class="promise-container">
+    <h2 class="promise-title">Our Promise</h2>
+
+    <div class="promise-grid">
+      <div class="promise-card">
+        <img src="{{ url_for('static', filename='img/about1.jpg') }}" alt="Human connection">
+        <div class="promise-content">
+          <h4>Human connection first</h4>
+          <p>Hospitality is the point; coffee is the flint.</p>
+        </div>
+      </div>
+
+      <div class="promise-card">
+        <img src="{{ url_for('static', filename='img/about2.jpg') }}" alt="Top-tier quality">
+        <div class="promise-content">
+          <h4>Top-tier quality, consistently</h4>
+          <p>Precision in the cup, warmth in the room.</p>
+        </div>
+      </div>
+
+      <div class="promise-card">
+        <img src="{{ url_for('static', filename='img/about3.jpg') }}" alt="Automation">
+        <div class="promise-content">
+          <h4>Automation that serves people</h4>
+          <p>Robots as quiet helpers — not the show.</p>
+        </div>
+      </div>
+
+      <div class="promise-card">
+        <img src="{{ url_for('static', filename='img/about4.jpg') }}" alt="Efficiency">
+        <div class="promise-content">
+          <h4>Efficient, lower-waste operations</h4>
+          <p>Smarter processes, cleaner footprint.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  window.addEventListener("load", () => {
+    document
+      .querySelector(".about-hero-content")
+      .classList.add("show");
+  });
+</script>
+{% include "partials/footer.html" %}
+
+</body>
+</html>

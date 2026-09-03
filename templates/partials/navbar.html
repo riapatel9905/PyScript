@@ -1,0 +1,70 @@
+<!-- ================= NAVBAR ================= -->
+<nav class="top-navbar">
+  <!-- LEFT : LOGO -->
+  <div class="nav-logo">
+    <a href="{{ url_for('shop.home') }}"><img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo"></a>
+  </div>
+
+  <!-- CENTER : MENU -->
+  <ul class="nav-menu">
+    <li><a href="{{ url_for('shop.home') }}" class="{{ 'active' if active=='home' }}">Home</a></li>
+    <li><a href="{{ url_for('shop.about') }}" class="{{ 'active' if active=='about' }}">About</a></li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle{{ ' active' if active=='menu' }}"
+         href="#"
+         id="menuDropdown"
+         role="button"
+         data-bs-toggle="dropdown"
+         aria-expanded="false">
+        Menu
+      </a>
+
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{{ url_for('shop.menu') }}#beverages">Beverages</a></li>
+        <li><a class="dropdown-item" href="{{ url_for('shop.menu') }}#signature">Signature</a></li>
+        <li><a class="dropdown-item" href="{{ url_for('shop.menu') }}#food">Food</a></li>
+        <li><a class="dropdown-item" href="{{ url_for('shop.menu') }}#desserts">Desserts</a></li>
+      </ul>
+    </li>
+
+    <li><a href="{{ url_for('shop.franchises') }}" class="{{ 'active' if active=='franchises' }}">Franchise</a></li>
+    <li><a href="{{ url_for('shop.contactus') }}" class="{{ 'active' if active=='contactus' }}">Contact Us</a></li>
+    <li><a href="{{ url_for('shop.feedback') }}" class="{{ 'active' if active=='feedback' }}">Feedback</a></li>
+  </ul>
+
+  <!-- RIGHT : SOCIAL + CART + PROFILE -->
+  <div class="nav-right">
+    <!-- Social -->
+    <div class="nav-social">
+      <a href="https://www.facebook.com" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://twitter.com" target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.youtube.com" target="_blank">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+
+    <!-- Cart -->
+    <a href="{{ url_for('cart.view_cart') }}" class="cart-btn">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-badge">{{ cart_count }}</span>
+    </a>
+
+    <!-- Profile (hover to reveal orders / logout - same icon, no visual change until interacted with) -->
+    <div class="profile-menu">
+      <i class="fas fa-user-circle profile-icon"></i>
+      <div class="profile-dropdown">
+        <div style="padding:10px 14px;color:#aaa;font-size:12px;border-bottom:1px solid #333;">{{ current_user.username }}</div>
+        <a href="{{ url_for('orders.history') }}">My Orders</a>
+        {% if current_user.is_admin %}<a href="{{ url_for('admin.dashboard') }}">Admin Panel</a>{% endif %}
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>

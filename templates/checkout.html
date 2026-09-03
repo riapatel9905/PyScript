@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Checkout | Py-Script The Tech Cafe</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+
+<body>
+
+<div class="flash-wrap">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+      {% for category, message in messages %}
+
+        <div class="flash flash-{{ category }}">
+          {{ message }}
+        </div>
+
+      {% endfor %}
+
+    {% endif %}
+
+  {% endwith %}
+
+</div>
+
+<div class="checkout-page">
+
+    <!-- PAGE HEADER -->
+    <div class="checkout-header">
+        <div>
+            <span class="checkout-eyebrow">PY-SCRIPT THE TECH CAFE</span>
+            <h1>Checkout</h1>
+            <p>Complete your order and enjoy your meal.</p>
+        </div>
+
+        <a href="{{ url_for('cart.view_cart') }}" class="checkout-back">
+            <i class="fas fa-arrow-left"></i>
+            Back to Cart
+        </a>
+    </div>
+
+
+    <!-- CHECKOUT CONTENT -->
+    <div class="checkout-wrap">
+
+        <!-- LEFT COLUMN -->
+        <div class="checkout-left">
+
+            <!-- CHOOSE STORE -->
+            <div class="checkout-card">
+                <h3>
+                    <i class="fas fa-store"></i>
+                    Choose Store
+                </h3>
+
+                {% if stores %}
+
+                    <button type="button" id="locate-btn" class="btn-gold" style="margin-bottom:14px;">
+                        <i class="fas fa-location-crosshairs"></i>
+                        Use my location
+                    </button>
+                    <p id="locate-status" style="font-size:12.5px;color:#777;margin:-6px 0 14px;"></p>
+
+                    {% set selected_store_id = form.store_id if form and form.store_id else (stores[0].id|string) %}
+
+                    {% for store in stores %}
+
+                    <label class="store-option {% if loop.first %}nearest{% endif %}" data-store-id="{{ store.id }}">
+
+                        <input
+                            type="radio"
+                            name="store_id"
+                            value="{{ store.id }}"
+                            {% if store.id|string == selected_store_id|string %}checked{% endif %}
+                            form="checkout-form"
+                        >
+
+                        <div class="store-radio"></div>
+
+                        <div class="store-info">
+                            <strong>{{ store.name }}</strong>
+
+                            {% if store.address %}
+                            <span>{{ store.address }}</span>
+                            {% endif %}
+
+                            {% if store.phone %}
+                            <small>
+                                <i class="fas fa-phone"></i>
+                                {{ store.phone }}
+                            </small>
+                            {% endif %}
+                        </div>
+
+                        {% if loop.first %}
+                        <span class="nearest-badge">
+                            Nearest
+                        </span>
+                        {% endif %}
+
+                    </label>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="no-store">
+                        <i class="fas fa-store-slash"></i>
+                        <p>No stores available.</p>
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- CUSTOMER DETAILS -->
+            <div class="checkout-card">
+
+                <h3>
+                    <i class="fas fa-user"></i>
+                    Customer Details
+                </h3>
+
+                <form
+                    id="checkout-form"
+                    method="POST"
+                    action="{{ url_for('cart.checkout') }}"
+                >
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value="{{ form.name if form and form.name else (user.username if user and user.username else '') }}"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                value="{{ form.phone if form and form.phone else (user.phone if user and user.phone else '') }}"
+                                placeholder="Enter your phone number"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ form.email if form and form.email else (user.email if user and user.email else '') }}"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            rows="4"
+                            placeholder="Enter your complete delivery address"
+                            required
+                        >{{ form.address if form and form.address else (user.address if user and user.address else '') }}</textarea>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                value="{{ form.city if form and form.city else '' }}"
+                                placeholder="City"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="pincode">
+                                Pincode
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                name="pincode"
+                                value="{{ form.pincode if form and form.pincode else '' }}"
+                                placeholder="Pincode"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+            <div class="checkout-card">
+
+                <h3>
+                    <i class="fas fa-credit-card"></i>
+                    Payment Method
+                </h3>
+
+                <div class="payment-tabs">
+
+                    <label class="payment-tab" data-method="cod">
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="cod"
+                            form="checkout-form"
+                            {% if not form or not form.payment_method or form.payment_method == 'cod' %}checked{% endif %}
+                        >
+
+                        <i class="fas fa-money-bill-wave"></i>
+
+                        Cash on Delivery
+
+                    </label>
+
+
+                    <label class="payment-tab" data-method="upi">
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="upi"
+                            form="checkout-form"
+                            {% if form and form.payment_method == 'upi' %}checked{% endif %}
+                        >
+
+                        <i class="fas fa-mobile-screen-button"></i>
+
+                        UPI
+
+                    </label>
+
+
+                    <label class="payment-tab" data-method="card">
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="card"
+                            form="checkout-form"
+                            {% if form and form.payment_method == 'card' %}checked{% endif %}
+                        >
+
+                        <i class="fas fa-credit-card"></i>
+
+                        Card
+
+                    </label>
+
+                </div>
+
+                <div class="payment-panel" data-panel="cod">
+                    <p style="font-size:13px;color:#666;margin:0;">
+                        Pay with cash when your order arrives.
+                    </p>
+                </div>
+
+                <div class="payment-panel" data-panel="upi">
+                    <div class="form-group">
+                        <label for="upi_id">UPI ID</label>
+                        <input
+                            type="text"
+                            id="upi_id"
+                            name="upi_id"
+                            placeholder="yourname@okbank"
+                            value="{{ form.upi_id if form and form.upi_id else '' }}"
+                            form="checkout-form"
+                        >
+                    </div>
+                </div>
+
+                <div class="payment-panel" data-panel="card">
+                    <div class="form-group">
+                        <label for="card_number">Card Number</label>
+                        <input
+                            type="text"
+                            id="card_number"
+                            name="card_number"
+                            placeholder="1234 5678 9012 3456"
+                            value="{{ form.card_number if form and form.card_number else '' }}"
+                            form="checkout-form"
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry">Expiry (MM/YY)</label>
+                            <input
+                                type="text"
+                                id="expiry"
+                                name="expiry"
+                                placeholder="MM/YY"
+                                value="{{ form.expiry if form and form.expiry else '' }}"
+                                form="checkout-form"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input
+                                type="text"
+                                id="cvv"
+                                name="cvv"
+                                placeholder="123"
+                                form="checkout-form"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+        <div class="checkout-right">
+
+            <div class="checkout-card order-summary">
+
+                <h3>
+                    <i class="fas fa-receipt"></i>
+                    Order Summary
+                </h3>
+
+
+                {% if items %}
+
+                    <div class="checkout-items">
+
+                        {% for item in items %}
+
+                        <div class="checkout-item">
+
+                            <div class="checkout-item-image">
+
+                                {% if item.menu_item.image %}
+
+                                <img
+                                    src="{{ url_for('static', filename='img/' ~ item.menu_item.image) }}"
+                                    alt="{{ item.menu_item.name }}"
+                                >
+
+                                {% else %}
+
+                                <div class="checkout-no-image">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="checkout-item-info">
+
+                                <strong>
+                                    {{ item.menu_item.name }}
+                                </strong>
+
+                                <span>
+                                    Qty: {{ item.quantity }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="checkout-item-price">
+                                ₹{{ "%.2f"|format(item.subtotal) }}
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="checkout-empty">
+
+                        <i class="fas fa-cart-shopping"></i>
+
+                        <p>
+                            Your cart is empty.
+                        </p>
+
+                        <a
+                            href="{{ url_for('shop.menu') }}"
+                            class="btn-gold"
+                        >
+                            Browse Menu
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if items %}
+
+                <div class="summary-line">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        ₹{{ "%.2f"|format(subtotal) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    {% if delivery_fee == 0 %}
+
+                        <strong class="free-text">
+                            FREE
+                        </strong>
+
+                    {% else %}
+
+                        <strong>
+                            ₹{{ "%.2f"|format(delivery_fee) }}
+                        </strong>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if delivery_fee > 0 %}
+
+                <div class="delivery-note">
+
+                    <i class="fas fa-truck"></i>
+
+                    Free delivery on orders above ₹500
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ₹{{ "%.2f"|format(total) }}
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    form="checkout-form"
+                    class="place-order-btn"
+                >
+
+                    <span>
+                        Place Order
+                    </span>
+
+                    <i class="fas fa-arrow-right"></i>
+
+                </button>
+
+
+                <div class="secure-checkout">
+
+                    <i class="fas fa-lock"></i>
+
+                    Secure checkout
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Py-Script The Tech Cafe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+
+<body>
+
+<div class="landing-page">
+
+    <!-- Decorative background -->
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+
+    <!-- =====================================================
+         MAIN HERO
+    ====================================================== -->
+
+    <main class="hero">
+
+        <!-- LEFT CONTENT -->
+
+        <section class="hero-copy">
+
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                EXCEPTIONAL QUALITY
+            </div>
+
+
+            <h1>
+                Coffee is
+                <br>
+                <span>not just</span>
+                <br>
+                a drink.
+            </h1>
+
+
+            <p class="hero-description">
+                Where freshly brewed coffee meets creativity.
+                Discover signature drinks, delicious bites and
+                a cafe experience made for every moment.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('auth.signup') }}"
+                   class="order-button">
+
+                    <span>ORDER NOW</span>
+
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+
+                <a href="{{ url_for('auth.login') }}"
+                   class="explore-link">
+
+                    Already a member?
+
+                    <strong>Login</strong>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+            </div>
+
+
+            <!-- Small information -->
+
+            <div class="hero-info">
+
+                <div class="info-item">
+                    <strong>03</strong>
+                    <span>Branches</span>
+                </div>
+
+                <div class="info-divider"></div>
+
+                <div class="info-item">
+                    <strong>20+</strong>
+                    <span>Menu Items</span>
+                </div>
+
+                <div class="info-divider"></div>
+
+                <div class="info-item">
+                    <strong>100%</strong>
+                    <span>Fresh</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COFFEE VISUAL
+        ================================================== -->
+
+        <section class="hero-visual">
+
+            <div class="visual-glow"></div>
+
+            <div class="coffee-image">
+
+                <img
+                    src="{{ url_for('static', filename='img/coff.jpg') }}"
+                    alt="Premium coffee"
+                >
+
+            </div>
+
+
+            <!-- Floating coffee beans -->
+
+            <span class="bean bean-one">●</span>
+            <span class="bean bean-two">●</span>
+            <span class="bean bean-three">●</span>
+            <span class="bean bean-four">●</span>
+
+
+            <!-- Product label -->
+
+            <div class="coffee-label">
+
+                <span class="label-line"></span>
+
+                <div>
+                    <small>HOUSE SPECIAL</small>
+                    <strong>Signature Coffee</strong>
+                </div>
+
+            </div>
+
+
+            <!-- Scroll indicator -->
+
+            <div class="scroll-indicator">
+
+                <span>SCROLL TO EXPLORE</span>
+
+                <div class="scroll-line"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         BOTTOM BRAND STRIP
+    ====================================================== -->
+
+    <section class="bottom-strip">
+
+        <div>
+            <span>COFFEE</span>
+            <i class="fas fa-circle"></i>
+            <span>CODE</span>
+            <i class="fas fa-circle"></i>
+            <span>COMMUNITY</span>
+        </div>
+
+        <p>
+            Crafted with passion at Py-Script The Tech Cafe
+        </p>
+
+    </section>
+
+</div>
+
+</body>
+</html>

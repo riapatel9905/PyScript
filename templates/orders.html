@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Orders | Py-Script The Tech Cafe</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+
+<body>
+
+<div class="flash-wrap">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+      {% for category, message in messages %}
+
+        <div class="flash flash-{{ category }}">
+          {{ message }}
+        </div>
+
+      {% endfor %}
+
+    {% endif %}
+
+  {% endwith %}
+
+</div>
+
+<div class="orders-page">
+
+  <!-- BACK TO HOME -->
+
+  <div class="page-top">
+    <a href="{{ url_for('shop.home') }}" class="back-home">
+      <i class="fas fa-arrow-left"></i>
+      Back to Home
+    </a>
+  </div>
+
+
+  <!-- ORDERS -->
+
+  <div class="orders-wrap">
+
+    <div class="orders-heading">
+
+      <div>
+        <span class="orders-label">YOUR ACCOUNT</span>
+        <h1>My Orders</h1>
+        <p>View your previous orders and track their status.</p>
+      </div>
+
+      <a href="{{ url_for('shop.menu') }}" class="orders-menu-btn">
+        <i class="fas fa-utensils"></i>
+        Browse Menu
+      </a>
+
+    </div>
+
+
+    <!-- EMPTY ORDERS -->
+
+    {% if not orders %}
+
+    <div class="empty-state orders-empty">
+
+      <div class="empty-icon">
+        <i class="fas fa-receipt"></i>
+      </div>
+
+      <h2>No orders yet</h2>
+
+      <p>
+        You haven't placed any orders yet.
+        Your delicious journey starts here!
+      </p>
+
+      <a href="{{ url_for('shop.menu') }}" class="btn-gold">
+        <i class="fas fa-utensils"></i>
+        Browse Menu
+      </a>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ORDER LIST -->
+
+    <div class="orders-list">
+
+      {% for order in orders %}
+
+      <a
+        href="{{ url_for('orders.confirmation', order_id=order.id) }}"
+        class="order-link"
+      >
+
+        <div class="order-card">
+
+          <!-- TOP SECTION -->
+
+          <div class="order-card-top">
+
+            <div class="order-main-info">
+
+              <div class="order-icon">
+                <i class="fas fa-receipt"></i>
+              </div>
+
+              <div>
+
+                <div class="order-number">
+                  Order #{{ order.id }}
+                </div>
+
+                <div class="order-date">
+                  <i class="far fa-calendar"></i>
+                  {{ order.created_at.strftime('%d %b %Y, %I:%M %p') }}
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <span class="status-pill status-{{ order.status }}">
+
+              {% if order.status == 'placed' %}
+                <i class="fas fa-clock"></i>
+
+              {% elif order.status == 'preparing' %}
+                <i class="fas fa-fire-burner"></i>
+
+              {% elif order.status == 'out_for_delivery' %}
+                <i class="fas fa-motorcycle"></i>
+
+              {% elif order.status == 'delivered' %}
+                <i class="fas fa-check"></i>
+
+              {% elif order.status == 'cancelled' %}
+                <i class="fas fa-xmark"></i>
+
+              {% endif %}
+
+              {{ order.status.replace('_',' ') }}
+
+            </span>
+
+          </div>
+
+
+          <!-- ORDER DETAILS -->
+
+          <div class="order-details">
+
+            <div class="order-detail-item">
+
+              <i class="fas fa-box"></i>
+
+              <div>
+                <span class="detail-label">Items</span>
+                <strong>
+                  {{ order.items|length }}
+                  item{% if order.items|length != 1 %}s{% endif %}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div class="order-detail-item">
+
+              <i class="fas fa-store"></i>
+
+              <div>
+                <span class="detail-label">Store</span>
+                <strong>
+                  {{ order.store.name }}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div class="order-detail-item">
+
+              <i class="fas fa-wallet"></i>
+
+              <div>
+                <span class="detail-label">Payment</span>
+                <strong>
+                  {{ order.payment_method.replace('_',' ')|title }}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div class="order-total">
+
+              <span class="detail-label">Total</span>
+
+              <strong>
+                ₹{{ order.total|int }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- BOTTOM -->
+
+          <div class="order-card-bottom">
+
+            <span>
+              <i class="fas fa-arrow-right"></i>
+              View order details
+            </span>
+
+            <i class="fas fa-chevron-right order-arrow"></i>
+
+          </div>
+
+        </div>
+
+      </a>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

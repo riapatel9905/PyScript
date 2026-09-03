@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-shell">
+  <div class="admin-sidebar">
+    <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint=='admin.dashboard' }}"><i class="fas fa-gauge"></i>&nbsp; Dashboard</a>
+    <a href="{{ url_for('admin.menu_list') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('admin.menu') }}"><i class="fas fa-mug-hot"></i>&nbsp; Menu Items</a>
+    <a href="{{ url_for('admin.store_list') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('admin.store') }}"><i class="fas fa-shop"></i>&nbsp; Branches</a>
+    <a href="{{ url_for('admin.order_list') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('admin.order') }}"><i class="fas fa-receipt"></i>&nbsp; Orders</a>
+    <a href="{{ url_for('admin.user_list') }}" class="{{ 'active' if request.endpoint=='admin.user_list' }}"><i class="fas fa-users"></i>&nbsp; Users</a>
+    <a href="{{ url_for('shop.home') }}"><i class="fas fa-arrow-left"></i>&nbsp; Back to Site</a>
+  </div>
+  <div class="admin-main">
+    {% block admin_content %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Order #{{ order.id }} | Py-Script The Tech Cafe</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+
+<body>
+
+<div class="flash-wrap">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+      {% for category, message in messages %}
+
+        <div class="flash flash-{{ category }}">
+          {{ message }}
+        </div>
+
+      {% endfor %}
+
+    {% endif %}
+
+  {% endwith %}
+
+</div>
+
+<div class="confirmation-page">
+
+
+    <!-- =====================================================
+         TOP NAV / BACK AREA
+    ====================================================== -->
+
+    <div class="confirmation-top">
+
+        <a
+            href="{{ url_for('shop.home') }}"
+            class="confirmation-back"
+        >
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Home</span>
+        </a>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUCCESS HEADER
+    ====================================================== -->
+
+    <section class="confirmation-hero">
+
+        <div class="success-icon">
+
+            <i class="fas fa-check"></i>
+
+        </div>
+
+
+        <span class="confirmation-eyebrow">
+            PY-SCRIPT THE TECH CAFE
+        </span>
+
+
+        <h1>
+            Order Placed!
+        </h1>
+
+
+        <p class="confirmation-message">
+            Thank you for ordering with us.
+            Your delicious meal is on its way.
+        </p>
+
+
+        <div class="confirmation-order-number">
+
+            <span>
+                Order
+            </span>
+
+            <strong>
+                #{{ order.id }}
+            </strong>
+
+            <span class="confirmation-dot">
+                ·
+            </span>
+
+            <span
+                class="status-pill status-{{ order.status }}"
+            >
+                {{ order.status.replace('_', ' ')|title }}
+            </span>
+
+        </div>
+
+
+        <!-- HOME BUTTON -->
+
+        <a
+            href="{{ url_for('shop.home') }}"
+            class="btn-gold home-success-btn"
+        >
+            <i class="fas fa-house"></i>
+            <span>Go to Home Page</span>
+        </a>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ORDER CONTENT
+    ====================================================== -->
+
+    <main class="confirmation-content">
+
+
+        <!-- =================================================
+             ORDER DETAILS CARD
+        ================================================== -->
+
+        <div class="confirmation-card">
+
+
+            <!-- STORE -->
+
+            <div class="confirmation-section">
+
+                <div class="confirmation-section-title">
+
+                    <div class="section-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+
+                    <div>
+                        <h3>
+                            Delivering From
+                        </h3>
+
+                        <span>
+                            Your selected store
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="confirmation-info">
+
+                    <strong>
+                        {{ order.store.name }}
+                    </strong>
+
+                    {% if order.store.address %}
+
+                    <p>
+                        <i class="fas fa-location-dot"></i>
+                        {{ order.store.address }}
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="confirmation-divider"></div>
+
+
+
+            <!-- DELIVERY ADDRESS -->
+
+            <div class="confirmation-section">
+
+                <div class="confirmation-section-title">
+
+                    <div class="section-icon">
+                        <i class="fas fa-location-dot"></i>
+                    </div>
+
+                    <div>
+                        <h3>
+                            Delivery Address
+                        </h3>
+
+                        <span>
+                            Your order will be delivered here
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="confirmation-info">
+
+                    <p class="delivery-address">
+                        {{ order.delivery_address }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="confirmation-divider"></div>
+
+
+
+            <!-- PAYMENT -->
+
+            <div class="confirmation-section">
+
+                <div class="confirmation-section-title">
+
+                    <div class="section-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+
+                    <div>
+                        <h3>
+                            Payment
+                        </h3>
+
+                        <span>
+                            Payment method used
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="confirmation-info payment-info">
+
+                    <strong>
+                        {{ order.payment_method.replace('_',' ')|title }}
+                    </strong>
+
+
+                    {% if order.payment_method in ('credit_card', 'debit_card', 'card') %}
+
+                    <span>
+                        <i class="fas fa-credit-card"></i>
+                        Ending in {{ order.payment_last4 }}
+                    </span>
+
+
+                    {% elif order.payment_method == 'upi' %}
+
+                    <span>
+                        <i class="fas fa-mobile-screen-button"></i>
+                        {{ order.payment_last4 }}
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="confirmation-divider"></div>
+
+
+
+            <!-- =================================================
+                 ITEMS
+            ================================================== -->
+
+            <div class="confirmation-items-section">
+
+                <div class="confirmation-section-title">
+
+                    <div class="section-icon">
+                        <i class="fas fa-bag-shopping"></i>
+                    </div>
+
+                    <div>
+                        <h3>
+                            Items
+                        </h3>
+
+                        <span>
+                            Your ordered items
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="confirmation-items">
+
+
+                    {% for oi in order.items %}
+
+                    <div class="confirmation-item">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="confirmation-item-image">
+
+                            {% if oi.image %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='img/' ~ oi.image
+                                ) }}"
+                                alt="{{ oi.name }}"
+                            >
+
+                            {% else %}
+
+                            <div class="confirmation-no-image">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+
+                        <!-- ITEM INFO -->
+
+                        <div class="confirmation-item-info">
+
+                            <h4>
+                                {{ oi.name }}
+                            </h4>
+
+                            <span>
+                                ₹{{ oi.price }} × {{ oi.quantity }}
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- SUBTOTAL -->
+
+                        <div class="confirmation-item-price">
+
+                            ₹{{ oi.subtotal }}
+
+                        </div>
+
+
+                    </div>
+
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PRICE SUMMARY
+            ================================================== -->
+
+            <div class="confirmation-summary">
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        ₹{{ order.subtotal|int }}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Delivery Fee
+                    </span>
+
+                    <strong
+                        class="{% if order.delivery_fee == 0 %}free-text{% endif %}"
+                    >
+
+                        {% if order.delivery_fee == 0 %}
+
+                            FREE
+
+                        {% else %}
+
+                            ₹{{ order.delivery_fee|int }}
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ₹{{ order.total|int }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 SECURE MESSAGE
+            ================================================== -->
+
+            <div class="confirmation-secure">
+
+                <i class="fas fa-shield-halved"></i>
+
+                <span>
+                    Your order information is secure
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             ACTION BUTTONS
+        ================================================== -->
+
+        <div class="confirmation-actions">
+
+
+            <a
+                href="{{ url_for('shop.menu') }}"
+                class="btn-gold"
+            >
+
+                <i class="fas fa-utensils"></i>
+
+                <span>
+                    Order More
+                </span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('orders.history') }}"
+                class="btn-outline"
+            >
+
+                <i class="fas fa-clock-rotate-left"></i>
+
+                <span>
+                    View All Orders
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+</body>
+</html>

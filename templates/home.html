@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Py-Script The Tech Cafe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS first -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your custom styles last so they can override Bootstrap if needed -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/extras.css') }}">
+</head>
+<body>
+{% set active = 'home' %}
+{% include "partials/navbar.html" %}
+
+<div class="flash-wrap">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='img/slide1.jpg') }}" class="d-block w-100" alt="Slide 1">
+    </div>
+
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/slide2.jpg') }}" class="d-block w-100" alt="Slide 2">
+    </div>
+
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/slide3.jpg') }}" class="d-block w-100" alt="Slide 3">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+<section class="about-like-section">
+  <div class="about-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="about-text">
+      <h5>WELCOME TO</h5>
+      <h2>Py-Script:- <span>The Tech Café</span></h2>
+
+      <p>
+        Famous for its diverse range of delicious coffee, Py-Script The Tech Café
+        blends technology with taste. A space where creativity meets caffeine,
+        crafted for modern minds and coffee lovers.
+      </p>
+
+      <div class="about-buttons">
+        <a href="{{ url_for('shop.menu') }}" class="btn-filled">OUR MENU</a>
+        <a href="{{ url_for('shop.franchises') }}" class="btn-outline">OUR OUTLETS</a>
+      </div>
+    </div>
+
+   <div class="about-image-single">
+  <img src="{{ url_for('static', filename='img/home.jpg') }}" alt="Py-Script Cafe">
+</div>
+  </div>
+</section>
+<section class="hotspot-section">
+
+
+  <img src="{{ url_for('static', filename='img/logo1.jpg') }}" alt="Coffee Image">
+
+  <!-- Hotspots -->
+<div class="hotspot h1 coffee"><span>+</span><div class="hotspot-circle">Jasmine White Mocha
+</div></div>
+<div class="hotspot h2 matcha"><span>+</span><div class="hotspot-circle">Seattle Fog
+</div></div>
+<div class="hotspot h3 noncoffee"><span>+</span><div class="hotspot-circle">Coconut Latte
+</div></div>
+<div class="hotspot h4 food"><span>+</span><div class="hotspot-circle">Espresso Martini
+</div></div>
+<div class="hotspot h5 dessert"><span>+</span><div class="hotspot-circle">Guihua Latte
+</div></div>
+
+</section>
+<section class="vision-mission-section">
+  <div class="vm-container">
+
+    <!-- LEFT : TEXT -->
+    <div class="vm-text">
+
+      <div class="vm-block">
+        <h4>OUR VISION</h4>
+        <p>
+          We want more and more people to sketch memorable moments
+          right here in our coffee bar and see our vision turn into
+          reality with flawless customer experiences.
+        </p>
+      </div>
+
+      <hr>
+
+      <div class="vm-block">
+        <h4>OUR MISSION</h4>
+        <p>
+          Consistency is crucial and our mission is to hone in on our
+          expertise of maintaining consistency throughout — be it in
+          terms of superior food & beverage quality, customer experience,
+          ambience, and value for money.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT : VIDEO -->
+    <div class="vm-video-wrapper">
+      <video autoplay muted loop playsinline>
+        <source src="{{ url_for('static', filename='img/video.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+  </div>
+</section>
+<section class="promo-banner"
+    style="background-image: url(&quot;{{ url_for('static', filename='img/slide4.jpg') }}&quot;);">
+
+</section>
+ <section class="quality-section">
+  <div class="quality-container">
+
+    <!-- Left images -->
+    <div class="quality-images">
+      <img src="{{ url_for('static', filename='img/quality2.jpg') }}" class="img-back" alt="Coffee image">
+      <img src="{{ url_for('static', filename='img/quality1.jpg') }}" class="img-front" alt="Coffee cup">
+    </div>
+
+    <!-- Right text -->
+    <div class="quality-text">
+      <h2>UNCOMPROMISED QUALITY GUARANTEED</h2>
+      <p>
+        We understand the difference between a good cup and a great cup and hence,
+        start with perfection from the very core – we call this strengthening the source.
+        Our coffee beans are handpicked from the best of the resources across the nation
+        and these finest beans are sourced directly from the estates to ensure freshness,
+        superior flavour, and consistent quality.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+{% include "partials/footer.html" %}
+
+</body>
+</html>

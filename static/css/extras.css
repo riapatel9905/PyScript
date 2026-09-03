@@ -1,0 +1,25 @@
+/* Additive-only rules so the original pages stay visually identical.
+   Nothing here overrides existing selectors from style.css / page css. */
+
+.profile-menu { position: relative; cursor: pointer; }
+.profile-dropdown {
+  display: none; position: absolute; right: 0; top: 30px; background: #1f1f1f;
+  border-radius: 10px; min-width: 170px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  z-index: 1000;
+}
+.profile-menu:hover .profile-dropdown { display: block; }
+.profile-dropdown a {
+  display: block; padding: 11px 14px; color: #fff; font-size: 13.5px;
+}
+.profile-dropdown a:hover { background: #f5c400; color: #000; }
+
+.flash-wrap { max-width: 900px; margin: 14px auto 0; padding: 0 20px; }
+.flash { padding: 12px 18px; border-radius: 8px; margin-bottom: 10px; font-size: 14px; font-family: sans-serif; }
+.flash-success { background: #e4f7ee; color: #1a7a4c; border: 1px solid #b8e6cf; }
+.flash-danger { background: #fdecec; color: #b3261e; border: 1px solid #f5c2c0; }
+.flash-info { background: #eef4fb; color: #23508a; border: 1px solid #c8dcf3; }
+
+/* menu page: qty-control "added" flash state */
+.qty-control button.just-added { background: #f5c400; }
+
+/* cart floating display button already exists in menu.css; no override here */

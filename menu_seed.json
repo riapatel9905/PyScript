@@ -1,0 +1,184 @@
+[
+  {
+    "category": "beverages",
+    "image": "m1.jpg",
+    "name": "Espresso",
+    "desc": "House-roasted Colombian & Ethiopian blend Cocoa, nuts, cherry, silky and balanced acidity.",
+    "price": 220
+  },
+  {
+    "category": "beverages",
+    "image": "m2.jpg",
+    "name": "Americano",
+    "desc": "Espresso infused with hot water Bold yet smooth coffee with lasting aroma.",
+    "price": 140
+  },
+  {
+    "category": "beverages",
+    "image": "m3.jpg",
+    "name": "Cappuccino",
+    "desc": "Espresso with steamed milk Creamy texture with airy milk foam.",
+    "price": 180
+  },
+  {
+    "category": "beverages",
+    "image": "m4.jpg",
+    "name": "Latte",
+    "desc": "Espresso and steamed milk Creamy, mellow taste with light froth.",
+    "price": 190
+  },
+  {
+    "category": "beverages",
+    "image": "m5.jpg",
+    "name": "Flat White",
+    "desc": "Smooth espresso-forward delight Velvety microfoam with balanced flavor.",
+    "price": 200
+  },
+  {
+    "category": "beverages",
+    "image": "m6.jpg",
+    "name": "Silver Jade Matcha",
+    "desc": "Sublime ceremonial matcha and organic jasmine tea blend with white\n           chocolate and whole milk, delivering an exquisitely smooth, balanced sip.",
+    "price": 220
+  },
+  {
+    "category": "beverages",
+    "image": "m7.jpg",
+    "name": "Coconut Matcha Cloud",
+    "desc": "A refreshing cloud of matcha combined with rich coconut cream, \n          coconut milk, and delicate elderflower cream foam for heavenly indulgence.",
+    "price": 140
+  },
+  {
+    "category": "beverages",
+    "image": "m8.jpg",
+    "name": "Matcha Flat White",
+    "desc": "Handcrafted, organic Tokyo matcha meets a dash of steamed milk, \n          creating a delicate balance of earthy richness and creamy texture.",
+    "price": 180
+  },
+  {
+    "category": "beverages",
+    "image": "m9.jpg",
+    "name": "Matcha Latte",
+    "desc": "A vibrant matcha latte, blending rich \n          ceremonial-grade matcha with creamy steamed milk for a refreshing, balanced sip.",
+    "price": 190
+  },
+  {
+    "category": "beverages",
+    "image": "m10.jpg",
+    "name": "Sicilian Yuzu Refresher",
+    "desc": "Juniper berry, Kyoto yuzu juice, Angostura bitters, \n          and fresh mint come together to create a vibrant Sicilian twist.",
+    "price": 200
+  },
+  {
+    "category": "beverages",
+    "image": "m11.jpg",
+    "name": "Rainier Morning Dew",
+    "desc": "Chinese Guihua blossom harmonizes with juniper berry \n          and freshly compressed citrus for a revitalizing aromatic awakening.",
+    "price": 200
+  },
+  {
+    "category": "signature",
+    "image": "m12.jpg",
+    "name": "Jasmine White Mocha",
+    "desc": "A mesmerizing fusion of medium roast espresso and jasmine tea, \n          enriched with silky Chocolate Blanc and creamy half and half.",
+    "price": 200
+  },
+  {
+    "category": "signature",
+    "image": "m13.jpg",
+    "name": "Seattle Fog",
+    "desc": "An enchanting blend of bold espresso, aromatic lavender, and house-brewed Earl Grey,\n           finished with creamy oatmilk and herb de Provence for a cozy hug from Seattle.",
+    "price": 220
+  },
+  {
+    "category": "signature",
+    "image": "m14.jpg",
+    "name": "Coconut Cardamom Latte",
+    "desc": "Double shot espresso, coconut cream, and cardamom bitters \n          balanced with maple syrup and toasted coconut flakes create a soft symphony in a cup.",
+    "price": 140
+  },
+  {
+    "category": "signature",
+    "image": "m15.jpg",
+    "name": "Espresso Martini",
+    "desc": "A daring twist on a classic cocktail: double espresso \n          meets Madagascar vanilla and virgin coffee liquor, crowned with decadent malted cream.",
+    "price": 180
+  },
+  {
+    "category": "signature",
+    "image": "m16.jpg",
+    "name": "Guihua Latte",
+    "desc": "Earthy rooibos and and a touch of guihua blossom syrup merge with \n          robust double espresso and velvety steamed whole milk to create a uniquely aromatic fusion.",
+    "price": 180
+  },
+  {
+    "category": "food",
+    "image": "m18.jpg",
+    "name": "Sausage Bagel sandwich",
+    "desc": "Bagel sandwich with cheese, egg and sausage (pork).\n          Bagel option: plain, rasin, everything, gluten free",
+    "price": 220
+  },
+  {
+    "category": "food",
+    "image": "m19.jpg",
+    "name": "Salmon Bagel Sandwich",
+    "desc": "Bagel, smoked salmon, cream cheese, and tomato. Bagel option: \n          plain, rasin, everything, gluten free",
+    "price": 140
+  },
+  {
+    "category": "food",
+    "image": "m20.jpg",
+    "name": "Blazing Bagel Sandwich",
+    "desc": "Ham, Cheddar Cheese & Egg",
+    "price": 180
+  },
+  {
+    "category": "food",
+    "image": "m21.jpg",
+    "name": "Vegan Breakfast Sandwich",
+    "desc": "Impossible Sausage, Cheddar Cheese & Egg",
+    "price": 190
+  },
+  {
+    "category": "desserts",
+    "image": "m22.jpg",
+    "name": "Berry Berry Pastry",
+    "desc": "Bursting with mixed berries, tangy-sweet filling in soft, buttery pastry.",
+    "price": 200
+  },
+  {
+    "category": "desserts",
+    "image": "m23.jpg",
+    "name": "Cream-Cheese-Bagel",
+    "desc": "Sliced bagel with cream cheese",
+    "price": 220
+  },
+  {
+    "category": "desserts",
+    "image": "m24.jpg",
+    "name": "Almond Croissant",
+    "desc": "Morning Glory Muffin",
+    "price": 140
+  },
+  {
+    "category": "desserts",
+    "image": "m25.jpg",
+    "name": "Blueberry Muffin",
+    "desc": "Soft, fluffy muffin packed with juicy blueberries and a golden top.",
+    "price": 180
+  },
+  {
+    "category": "desserts",
+    "image": "m26.jpg",
+    "name": "Mochi-Donuts",
+    "desc": "Premium Japanese-style Mochi Donuts",
+    "price": 190
+  },
+  {
+    "category": "desserts",
+    "image": "m27.jpg",
+    "name": "Farina-Macarons",
+    "desc": "Local Portland bakery specializing in Parisian macarons.",
+    "price": 200
+  }
+]

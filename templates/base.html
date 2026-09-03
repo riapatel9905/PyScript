@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>
+    {% block title %}
+    Py-Script The Tech Cafe
+    {% endblock %}
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/app.css') }}">
+
+  {% block extra_css %}
+  {% endblock %}
+
+</head>
+
+<body>
+
+  <!-- ================= ONE NAVBAR ================= -->
+
+  {% include "partials/navbar.html" %}
+
+
+  <!-- ================= FLASH MESSAGES ================= -->
+
+  <div class="flash-wrap">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+      {% if messages %}
+
+        {% for category, message in messages %}
+
+          <div class="flash flash-{{ category }}">
+            {{ message }}
+          </div>
+
+        {% endfor %}
+
+      {% endif %}
+
+    {% endwith %}
+
+  </div>
+
+
+  <!-- ================= PAGE CONTENT ================= -->
+
+  {% block content %}
+  {% endblock %}
+
+
+  <!-- ================= ONE FOOTER ================= -->
+
+  {% include "partials/footer.html" %}
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  {% block extra_js %}
+  {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta charset="UTF-8">
+  <title>Login | Py-Script The Tech Cafe</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+
+
+<div class="login-wrapper">
+
+  <!-- LEFT IMAGE -->
+  <div class="login-image"></div>
+
+  <!-- RIGHT FORM -->
+  <div class="login-form">
+    <div class="login-logo">
+  <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Py-Script Logo">
+</div>
+
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Please login to your account</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <p class="subtitle" style="color:#ff8080;margin-top:-10px;">
+          {% for category, message in messages %}{{ message }}<br>{% endfor %}
+        </p>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('auth.login') }}">
+      <label>Email address</label>
+<input
+  type="email"
+  id="email"
+  name="email"
+  placeholder="you@example.com"
+  value="{{ email }}"
+  required
+>
+
+<label>Password</label>
+<input
+  type="password"
+  id="password"
+  name="password"
+  placeholder="********"
+  required
+  pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,12}$"
+  title="Password must be 8–12 characters and include letters, numbers, and a special character"
+>
+
+      <button type="submit">Log In</button>
+
+      <p class="signup-text">
+        Don’t have an account?
+        <a href="{{ url_for('auth.signup') }}">Sign up</a>
+      </p>
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>

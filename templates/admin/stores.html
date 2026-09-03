@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% block title %}Manage Branches{% endblock %}
+{% block admin_content %}
+<div class="admin-topbar">
+  <h1 style="margin:0;">Branches</h1>
+  <a href="{{ url_for('admin.store_form') }}" class="btn-gold btn-sm">+ Add Branch</a>
+</div>
+
+<table class="admin-table">
+  <thead><tr><th>Name</th><th>Address</th><th>Phone</th><th>Coordinates</th><th>Active</th><th></th></tr></thead>
+  <tbody>
+  {% for store in stores %}
+    <tr>
+      <td>{{ store.name }}</td>
+      <td style="max-width:280px;">{{ store.address }}</td>
+      <td>{{ store.phone }}</td>
+      <td>{{ '%.5f'|format(store.latitude) }}, {{ '%.5f'|format(store.longitude) }}</td>
+      <td>{% if store.is_active %}<span class="pill-yes">Yes</span>{% else %}<span class="pill-no">No</span>{% endif %}</td>
+      <td class="table-actions">
+        <a href="{{ url_for('admin.store_form', store_id=store.id) }}" class="btn-outline btn-sm">Edit</a>
+        <form method="post" action="{{ url_for('admin.store_delete', store_id=store.id) }}" onsubmit="return confirm('Delete {{ store.name }}?');">
+          <button type="submit" class="btn-danger btn-sm">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" style="text-align:center;color:#999;">No branches yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

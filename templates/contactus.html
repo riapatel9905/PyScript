@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Py-Script The Tech Cafe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS first -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your custom styles last so they can override Bootstrap if needed -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contactus.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/extras.css') }}">
+</head>
+<body>
+{% set active = 'contactus' %}
+{% include "partials/navbar.html" %}
+
+<div class="flash-wrap">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<!-- CONTACT HERO SECTION -->
+<section class="contact-hero">
+  <div class="contact-hero-overlay"></div>
+
+  <h1 class="contact-hero-title">Contact Us</h1>
+</section>
+
+<section class="contact-section">
+  <div class="contact-wrapper">
+
+    <!-- LEFT : CONTACT INFO -->
+    <div class="contact-info">
+  <h3>Contact Us</h3>
+
+  <p><strong>
+    📍Adress:</strong><br>
+     1-2, Devangan Flats,<br>
+        H.L. Commerce College Road,<br>
+        Navrangpura, Ahmedabad – 380009,<br>
+        Gujarat, India
+  </p>
+
+  <p><Strong>✉ Email:</Strong> pyscript@gmail.com
+</p>
+  <p><strong>📞 Phone:</strong> +91 84010 12333</p>
+
+  <div class="contact-timings">
+    <p><strong>🕒 Timings:</strong><br>
+       12:00 PM – 6:00 PM</p>
+    <p><strong>📅 Open:</strong> Monday – Saturday</p>
+  </div>
+</div>
+
+<div class="contact-form">
+<form id="contactForm">
+
+  <!-- TYPE OF QUERY (REQUIRED) -->
+  <div class="form-row">
+    <label>Type of Query</label>
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="queryType" value="feedback" required>
+        Question
+      </label>
+
+      <label>
+        <input type="radio" name="queryType" value="complaint">
+        Complaint
+      </label>
+
+      <label>
+        <input type="radio" name="queryType" value="suggestion">
+        Suggestion
+      </label>
+    </div>
+  </div>
+
+  <!-- FIRST NAME -->
+  <input
+    type="text"
+    placeholder="First Name"
+    pattern="[A-Za-z]+"
+    title="Only letters allowed"
+    required>
+
+  <!-- LAST NAME -->
+  <input
+    type="text"
+    placeholder="Last Name"
+    pattern="[A-Za-z]+"
+    title="Only letters allowed"
+    required>
+
+  <!-- EMAIL -->
+  <input
+    type="email"
+    placeholder="Email Address"
+    required>
+
+  <!-- PHONE -->
+  <input
+    type="tel"
+    placeholder="Contact Number"
+    pattern="[0-9]{10}"
+    maxlength="10"
+    required>
+
+  <!-- MESSAGE -->
+  <textarea
+    placeholder="Your Message"
+    required></textarea>
+
+  <button type="submit">Send Message</button>
+
+</form>
+</div>
+
+
+
+    <!-- RIGHT : MAP -->
+    <a href="https://maps.app.goo.gl/UUD9o6pJNNXuQtF77" target="_blank" class="map-link">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.7808483730632!2d72.55267357510442!3d23.03181747916724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85005ec7755f%3A0x38878e571f9a2166!2sDEVANGAN%20FLATS!5e0!3m2!1sen!2sin!4v1769604770308!5m2!1sen!2sin" width="600" height="450" style="border:0;"
+  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</a>
+
+  </div>
+</section>
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    alert("Thank you! Your message has been sent successfully ☕");
+
+    this.reset();
+  });
+</script>
+{% include "partials/footer.html" %}
+
+</body>
+</html>

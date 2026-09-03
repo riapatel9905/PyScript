@@ -1,0 +1,99 @@
+
+/* ---------- TITLE SECTION ---------- */
+.franchise-title-section {
+  width: 100%;
+  text-align: center;
+  padding: 100px 0 30px;
+  background: #7f6c6c;
+}
+
+.franchise-title-section h2 {
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #2b2b2b;
+  position: relative;
+}
+
+/* subtle underline */
+.franchise-title-section h2::after {
+  content: "";
+  width: 80px;
+  height: 3px;
+  background: #2c2b2a;
+  display: block;
+  margin: 14px auto 0;
+  border-radius: 4px;
+}
+
+/* ---------- SIMPLE DIVIDER ---------- */
+.franchise-divider {
+  width: 100%;
+  height: 5px;
+  background: rgb(0, 0, 0);
+}
+  /* ================= BRANCH SECTION ================= */
+
+.branch-section {
+  padding: 80px 8%;
+  background: #f3e4cf;
+}
+
+/* TOP ROW */
+.branch-top {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+/* LEFT : ADDRESS */
+.branch-info {
+  width: 45%;
+}
+
+.branch-info h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.branch-address,
+.branch-phone {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* RIGHT : MAP */
+.branch-map {
+  width: 55%;
+}
+
+.branch-map iframe {
+  width: 100%;
+  height: 320px;
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* IMAGE GALLERY */
+.branch-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.branch-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.branch-gallery img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
